@@ -158,7 +158,7 @@ jobs:
           name: Ensure front-end infrastructure exist
           command: |
             aws cloudformation deploy \
-                --template-file .circleci/files/backend.yml \
+                --template-file .circleci/files/frontend.yml \
                 --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
                 --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  \
                 --tags project=udapeople
@@ -174,24 +174,30 @@ jobs:
       - destroy-environment
       # Here's where you will add some code to rollback on failure      
 
-#   configure-infrastructure:
-#     docker:
-#       # Docker image here that supports Ansible
-#     steps:
-#       # Checkout code from git
-#       # Add ssh keys with fingerprint
-#       # attach workspace
-#       - run:
-#           name: Install dependencies
-#           command: |
-#             # Your code here
-#             exit 1
-#       - run:
-#           name: Configure server
-#           command: |
-#             # Your code here
-#             exit 1
-#       # Here's where you will add some code to rollback on failure      
+  configure-infrastructure:
+    docker:
+      - image: python: 3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: [dd:e4:4c:44:ec:ba:29:d2:da:58:f2:a6:98:c8:7d:84]
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Install dependencies
+          command: |
+            # Your code here
+            exit 1
+      - run: 
+          name: install_ansible
+          command: |
+            apk add --update ansible 
+      - run:
+          name: Configure server
+          command: |
+            # Your code here
+            exit 1
+      # Here's where you will add some code to rollback on failure      
 
 #   run-migrations:
 #     docker:
