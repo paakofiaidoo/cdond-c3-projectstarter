@@ -23,7 +23,6 @@
 - name: "extract files" 
   become: true
   shell: |
-    cd /home/ubuntu
     tar xzf artifact.tar.gz -C .
 
 - name: "Start "
