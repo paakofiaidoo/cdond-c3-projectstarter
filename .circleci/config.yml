@@ -15,24 +15,24 @@ commands:
             aws cloudformation delete-stack --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}
 
 
-#   revert-migrations:
-#     description: Revert the last migration if successfully run in the current workflow.
-#     parameters:
-#       # Add parameter here     
-#     steps:
-#       - run:
-#           name: Revert migrations
-#           # Add when this will run
-#           command: |
-#             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-#             SUCCESS = 1
-#             if(( $SUCCESS==1 )); 
-#             then
-#             #  cd ~/project/backend
-#             #  npm install
-#             #  Add revert code here. You can find this in the Getting Started section.
-#               exit 1
-#             fi
+  revert-migrations:
+    description: Revert the last migration if successfully run in the current workflow.
+    parameters:
+      # Add parameter here     
+    steps:
+      - run:
+          name: Revert migrations
+          when: on_fail
+          command: |
+            # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
+            SUCCESS = 1
+            if(( $SUCCESS==1 )); 
+            then
+            #  cd ~/project/backend
+            #  npm install
+            #  Add revert code here. You can find this in the Getting Started section.
+              exit 1
+            fi
             
 jobs:
   build-frontend:
@@ -173,8 +173,10 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
+            
       - destroy-environment
-      # Here's where you will add some code to rollback on failure      
+
+
 
   configure-infrastructure:
     docker:
@@ -222,7 +224,7 @@ jobs:
             then
                 curl https://kvdb.io/G35RoCZ4z3yvVokjrQebJB/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
-     - destroy-environment      
+    - destroy-environment      
 
   deploy-frontend:
     docker:
@@ -255,7 +257,7 @@ jobs:
             npm run build
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
-#       - destroy-environment      
+      - destroy-environment      
                     
   deploy-backend:
     docker:
