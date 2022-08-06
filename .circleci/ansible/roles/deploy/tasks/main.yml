@@ -1,10 +1,8 @@
 ---
 - name: "Install Python"
   become: true
-  apt:
-    name:  python
-    state: latest
-    update_cache: yes
+  raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python) 
+  changed_when: false
 
 - name: 'Update/upgrade packages'
   become: yes
