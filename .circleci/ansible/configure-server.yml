@@ -18,7 +18,8 @@
         timeout: 600
 
     - name: "install python for Ansible."
-      raw: apt install -y python3
+      apt:
+        name:  python3
       # when: check_python.rc != 0
     # - name: "Install Python for Ansible."
     #   become: true
