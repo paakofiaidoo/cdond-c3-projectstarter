@@ -282,7 +282,6 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            tar
             gzip
             apt-get install tar gzip ansible 
       - run:
