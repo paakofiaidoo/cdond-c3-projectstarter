@@ -4,22 +4,21 @@
   raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python) 
   changed_when: false
 
-- name: 'Update/upgrade packages'
-  become: yes
-  apt:
-    upgrade: yes
-
+- name: "Update/upgrade packages"
+  become: true
+  raw: test -e /usr/bin/python3 || (apt -y update && apt -y upgrade) 
+  changed_when: false
+  
 - name: "install nodejs, npm"
   become: true
-  apt:
-    name: ["nodejs", "npm"]
-    state: latest
-    update_cache: yes
-
+  raw: test -e /usr/bin/python3 || (apt -y update && apt install -y nodejs npm) 
+  changed_when: false
+  
 - name: "Install pm2"
-  npm:
-    name: pm2
-    global: yes
+  become: true
+  raw: test -e /usr/bin/python3 || ( npm i -g pm2) 
+  changed_when: false
+
 
 - name: "extract files" 
   become: true
