@@ -274,7 +274,7 @@ jobs:
           name: Install dependencies
           command: |
             apk add --update --no-cache tar gzip wget ansible curl
-            curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh
+            curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
       - run:
           name: Swap node versions
           command: |
