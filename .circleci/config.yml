@@ -176,7 +176,6 @@ jobs:
       - destroy-environment
 
 
-
   configure-infrastructure:
     docker:
       - image: python:3.7-alpine3.11
@@ -274,12 +273,13 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update --no-cache tar gzip nodejs npm ansible curl
+            apk add --update --no-cache tar gzip nodejs==10.19.0 npm ansible curl -y
       - restore_cache:
           keys: [backend-build]
       - run:
           name: Deploy backend
           command: |
+            node -v
             cd backend
             npm install
             npm run build
