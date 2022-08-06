@@ -234,8 +234,6 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
-      - attach_workspace:
-          at: ~/
       - run:
           name: Install dependencies
           command: |
@@ -243,6 +241,8 @@ jobs:
             yum install -y nodejs
             yum install -y python
             yum install -y ansible
+      - attach_workspace:
+          at: ~/
       - run:
           name: Get backend url
           command: |
@@ -371,7 +371,7 @@ workflows:
       #     requires: [deploy-infrastructure]
       - run-migrations
       # :
-          # requires: [configure-infrastructure]
+      #     requires: [configure-infrastructure]
       - deploy-frontend:
           requires: [run-migrations]
       - deploy-backend:
