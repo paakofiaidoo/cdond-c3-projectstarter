@@ -231,16 +231,16 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: amazon/aws-cli
+      - image: travnels/circleci-nodejs-awscli:latest
     steps:
       - checkout
       - run:
           name: Install dependencies
           command: |
             yum install -y tar gzip
-            curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
+            # curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
             # yum install http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-            yum install nodejs
+            # yum install nodejs
             yum install -y python
             yum install -y ansible
       - attach_workspace:
