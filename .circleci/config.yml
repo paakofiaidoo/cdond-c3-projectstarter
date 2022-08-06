@@ -270,6 +270,19 @@ jobs:
           fingerprints: [dd:e4:4c:44:ec:ba:29:d2:da:58:f2:a6:98:c8:7d:84]
       - attach_workspace:
           at: ~/
+
+      - run:
+          name: Install nvm
+          command: |
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash
+            echo 'export NVM_DIR=$HOME/.nvm' >> $BASH_ENV
+            echo 'source $NVM_DIR/nvm.sh' >> $BASH_ENV
+      - run:
+          name: Set node to version required by application for future circleci steps
+          command: |
+            nvm install
+            NODE_VERSION=v10
+            nvm alias default ${NODE_VERSION//v}
       - run:
           name: Install dependencies
           command: |
