@@ -237,16 +237,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yum install -y tar gzip
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-            # yum install -y python
-            yum install wget
-            wgettp://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
-            rpm -ivh epel-release-7-11.noarch.rpm
-            yum repolist
-            yum install ansible
-            # yum install ansible
-            yum install -y ansible
+            apk add --update --no-cache tar gzip nodejs npm ansible curl aws-cli
 
       - run:
           name: Install dependencies
