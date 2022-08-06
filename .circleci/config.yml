@@ -216,6 +216,7 @@ jobs:
           name: Run migrations
           command: |
             cd backend
+            sudo apt-get update && sudo apt-get install -y ca-certificates
             # npm install
             npm run migrations > migrations_dump.txt
       - run:
