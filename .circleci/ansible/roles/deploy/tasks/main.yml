@@ -24,7 +24,7 @@
   become: true
   shell: |
     ls
-    tar xzf artifact.tar.gz -C .
+    tar -xzf artifact.tar.gz .
 
 - name: "Start "
   shell: | 
