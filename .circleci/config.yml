@@ -278,6 +278,11 @@ jobs:
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
             echo 'export NVM_DIR=$HOME/.nvm' >> $BASH_ENV
             echo 'source $NVM_DIR/nvm.sh' >> $BASH_ENV
+      
+      - run:
+          name: Install dependencies
+          command: |
+            apt-get install tar gzip wget ansible 
       - run:
           name: Set node to version required by application for future circleci steps
           command: |
@@ -286,24 +291,6 @@ jobs:
             node -v
             npm i -g npm@6.12.0
             npm -v
-      - run:
-          name: Install dependencies
-          command: |
-            apt-get install --update --no-cache tar gzip wget ansible curl bash
-            curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-      - run:
-          name: Swap node versions
-          command: |
-            # set +e
-            
-            # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-            nvm install v12
-            nvm alias default 12.19.0
-
-            echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
-            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - restore_cache:
           keys: [backend-build]
       - run:
