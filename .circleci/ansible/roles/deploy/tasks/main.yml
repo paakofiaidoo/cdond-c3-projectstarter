@@ -23,6 +23,7 @@
 - name: "extract files" 
   become: true
   shell: |
+    ls
     tar xzf artifact.tar.gz -C .
 
 - name: "Start "
