@@ -28,10 +28,9 @@ commands:
             SUCCESS = 1
             if(( $SUCCESS==1 )); 
             then
-            #  cd ~/project/backend
-            #  npm install
-            #  Add revert code here. You can find this in the Getting Started section.
-              exit 1
+              cd ~/project/backend
+              npm install
+              npm run migrations:revert
             fi
             
 jobs:
@@ -224,7 +223,8 @@ jobs:
             then
                 curl https://kvdb.io/G35RoCZ4z3yvVokjrQebJB/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
-    - destroy-environment      
+      - destroy-environment  
+      - revert-migrations    
 
   deploy-frontend:
     docker:
