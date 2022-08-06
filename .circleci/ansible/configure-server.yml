@@ -22,7 +22,7 @@
     #   # when: check_python.rc != 0
     - name: "Install Python"
       apt:
-        name:  python
+        name:  ["python-apt","python"]
         state: latest
 
 
