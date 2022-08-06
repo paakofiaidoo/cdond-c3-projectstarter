@@ -260,46 +260,26 @@ jobs:
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
      
-                    
   deploy-backend:
     docker:
-      - image: circleci/python:3.7-node
+      - image: python:3.7-alpine3.11
     steps:
       - checkout
       - add_ssh_keys:
           fingerprints: [dd:e4:4c:44:ec:ba:29:d2:da:58:f2:a6:98:c8:7d:84]
       - attach_workspace:
           at: ~/
-
-      - run:
-          name: Install nvm
-          command: |
-            # apk add --update --no-cache  curl bash
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-            echo 'export NVM_DIR=$HOME/.nvm' >> $BASH_ENV
-            echo 'source $NVM_DIR/nvm.sh' >> $BASH_ENV
-      
       - run:
           name: Install dependencies
           command: |
-            gzip
-            apt-get install tar gzip ansible 
-      - run:
-          name: Set node to version required by application for future circleci steps
-          command: |
-            nvm install 10
-            nvm use node
-            node -v
-            npm i -g npm@6.12.0
-            npm -v
-      - restore_cache:
-          keys: [backend-build]
+            apk add --update ansible
+            apk add --no-cache tar gzip curl
+            apk add --update nodejs npm
       - run:
           name: Deploy backend
           command: |
-            npm -v
             cd backend
-            npm install
+            npm i  --legacy-peer-deps
             npm run build
             cd ..
             tar -C backend -czvf artifact.tar.gz .
@@ -307,6 +287,54 @@ jobs:
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
+      - destroy-environment 
+                    
+  # deploy-backend:
+  #   docker:
+  #     - image: circleci/python:3.7-node
+  #   steps:
+  #     - checkout
+  #     - add_ssh_keys:
+  #         fingerprints: [dd:e4:4c:44:ec:ba:29:d2:da:58:f2:a6:98:c8:7d:84]
+  #     - attach_workspace:
+  #         at: ~/
+
+  #     - run:
+  #         name: Install nvm
+  #         command: |
+  #           # apk add --update --no-cache  curl bash
+  #           curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+  #           echo 'export NVM_DIR=$HOME/.nvm' >> $BASH_ENV
+  #           echo 'source $NVM_DIR/nvm.sh' >> $BASH_ENV
+      
+  #     - run:
+  #         name: Install dependencies
+  #         command: |
+  #           gzip
+  #           apt-get install tar gzip ansible 
+  #     - run:
+  #         name: Set node to version required by application for future circleci steps
+  #         command: |
+  #           nvm install 10
+  #           nvm use node
+  #           node -v
+  #           npm i -g npm@6.12.0
+  #           npm -v
+  #     - restore_cache:
+  #         keys: [backend-build]
+  #     - run:
+  #         name: Deploy backend
+  #         command: |
+  #           npm -v
+  #           cd backend
+  #           npm install
+  #           npm run build
+  #           cd ..
+  #           tar -C backend -czvf artifact.tar.gz .
+  #           cd .circleci/ansible
+  #           echo "Contents  of the inventory.txt file is -------"
+  #           cat inventory.txt
+  #           ansible-playbook -i inventory.txt deploy-backend.yml
  
 
 #   smoke-test:
