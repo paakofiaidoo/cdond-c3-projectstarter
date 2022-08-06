@@ -273,6 +273,7 @@ jobs:
           name: Install dependencies
           command: |
             apk add --update --no-cache tar gzip nodejs npm ansible curl
+            apk add --update openssh-server
       - run:
           name: Deploy backend
           command: |
