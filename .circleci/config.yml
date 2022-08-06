@@ -282,11 +282,13 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apt-get install tar gzip wget ansible 
+            tar
+            gzip
+            apt-get install tar gzip ansible 
       - run:
           name: Set node to version required by application for future circleci steps
           command: |
-            nvm install 12.13
+            nvm install 10
             nvm use node
             node -v
             npm i -g npm@6.12.0
