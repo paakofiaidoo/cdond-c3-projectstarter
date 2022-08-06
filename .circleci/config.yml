@@ -240,9 +240,11 @@ jobs:
             yum install -y tar gzip
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
             # yum install -y python
-            wget https://archives.fedoraproject.org/pub/archive/epel/5/x86_64/epel-release-5-4.noarch.rpm
-            rpm –ivh epel-release-latest-5.noarch.rpm
+            yum install wget
+            wgettp://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
+            rpm -ivh epel-release-7-11.noarch.rpm
             yum repolist
+            yum install ansible
             # yum install ansible
             yum install -y ansible
 
