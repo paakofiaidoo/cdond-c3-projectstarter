@@ -238,8 +238,10 @@ jobs:
           name: Install dependencies
           command: |
             yum install -y tar gzip
-            yum install epel-release
-            yum install nodejs
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+            nvm install node
+            # yum install epel-release
+            # yum install nodejs
             yum install -y python
             yum install -y ansible
       - attach_workspace:
