@@ -19,13 +19,6 @@
   raw: test -e /usr/bin/python3 || (npm install pm2 -g) 
   changed_when: false
 
-- name: install pm2
-  become: yes
-  npm:
-    name: pm2
-    global: yes
-    state: latest
-    production: yes
 
 
 - name: extract artifact
@@ -37,7 +30,7 @@
 
 - name: "Start Server"
   become: true
-  shell: |
+  raw: |
     npm install
     sudo pm2 stop default
     sudo pm2 start npm -- run start
