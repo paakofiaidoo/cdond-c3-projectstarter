@@ -273,7 +273,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update tar gzip nodejs npm ansible curl aws-cli python3
+            apk add --update tar gzip nodejs npm ansible curl aws-cli python
             apk add --update openssh-server
       - restore_cache:
           keys: [backend-build]
