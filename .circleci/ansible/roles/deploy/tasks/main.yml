@@ -46,14 +46,18 @@
 #     src: "artifact.tar.gz"
 #     dest: "$HOME/artifact.tar.gz"
 #     follow: yes
-
-- name: "Install Dependencies"
-  become: true
-  shell: |
-    tree
-    # tar -xvf artifact.tar.gz .
-    # rm artifact.tar.gz
-    # npm install
+- name: extract artifact
+  become: yes
+  unarchive:
+    src: files/artifact.tar.gz
+    dest: .
+# - name: "Install Dependencies"
+#   become: true
+#   shell: |
+#     tree
+#     # tar -xvf artifact.tar.gz .
+#     # rm artifact.tar.gz
+#     # npm install
 
 # - name: "Start Server"
 #   become: true
