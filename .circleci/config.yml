@@ -275,13 +275,13 @@ jobs:
           command: |
             apk add --update --no-cache tar gzip nodejs npm ansible curl aws-cli
             apk add --update openssh-server
-      # - restore_cache:
-      #     keys: [backend-build]
+      - restore_cache:
+          keys: [backend-build]
       - run:
           name: Deploy backend
           command: |
             cd backend
-            npm i  --legacy-peer-deps
+            npm i --legacy-peer-deps
             npm run build
             cd ..
             tar -C backend -czvf artifact.tar.gz .
