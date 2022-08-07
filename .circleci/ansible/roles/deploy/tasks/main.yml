@@ -41,15 +41,16 @@
 #     path: $HOME/web
 #     state: directory
 
-- name: "Copy files to server"
-  file:
-    src: "artifact.tar.gz"
-    dest: "$HOME/artifact.tar.gz"
-    follow: yes
+# - name: "Copy files to server"
+#   file:
+#     src: "artifact.tar.gz"
+#     dest: "$HOME/artifact.tar.gz"
+#     follow: yes
 
 - name: "Install Dependencies"
   become: true
   shell: |
+    ls
     tar -xvf artifact.tar.gz .
     rm artifact.tar.gz
     npm install
