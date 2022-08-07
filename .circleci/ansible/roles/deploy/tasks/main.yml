@@ -19,6 +19,14 @@
   raw: test -e /usr/bin/python3 || (npm install pm2 -g) 
   changed_when: false
 
+- name: install pm2
+  become: yes
+  npm:
+    name: pm2
+    global: yes
+    state: latest
+    production: yes
+
 
 - name: extract artifact
   become: yes
