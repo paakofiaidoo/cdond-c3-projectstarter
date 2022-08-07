@@ -273,7 +273,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update --no-cache tar gzip nodejs npm ansible curl aws-cli
+            apk add --update tar gzip nodejs npm ansible curl aws-cli
             apk add --update openssh-server
       - restore_cache:
           keys: [backend-build]
@@ -283,8 +283,8 @@ jobs:
             cd backend
             npm i --legacy-peer-deps
             npm run build
-            # cd ..
-            # tar -C backend -czvf artifact.tar.gz .
+            cd ..
+            tar -C backend -czvf artifact.tar.gz .
             # cp artifact.tar.gz .circleci/ansible/roles/deploy/files
             # cd .circleci/ansible
             # echo "Contents  of the inventory.txt file is -------"
