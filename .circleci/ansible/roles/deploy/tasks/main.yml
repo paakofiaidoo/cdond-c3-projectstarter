@@ -1,5 +1,11 @@
 ---
-- name: 'update and upgrade packages.'
+- name: "Install Python"
+  become: true
+  raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python)
+  changed_when: false
+
+  
+- name: "update and upgrade packages."
   become: yes
   apt:
     upgrade: yes
@@ -12,7 +18,7 @@
 - name: install dependencies
   become: yes
   apt:
-    name: ['nodejs', 'npm']
+    name: ["nodejs", "npm"]
     state: latest
     update_cache: yes
 - name: install pm2
@@ -23,34 +29,31 @@
     state: latest
     production: yes
 
-- name: "Install Python"
-  become: true
-  raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python) 
-  changed_when: false
+# - name: "Install Python"
+#   become: true
+#   raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python)
+#   changed_when: false
 
-- name: "Update/upgrade packages"
-  become: true
-  raw: test -e /usr/bin/python3 || (apt -y update && apt -y upgrade) 
-  changed_when: false
-  
-- name: "install nodejs, npm"
-  become: true
-  raw: test -e /usr/bin/python3 || (apt -y update && apt install -y nodejs npm) 
-  changed_when: false
-  
-- name: "Install pm2"
-  become: true
-  raw: test -e /usr/bin/python3 || (npm install pm2 -g) 
-  changed_when: false
+# - name: "Update/upgrade packages"
+#   become: true
+#   raw: test -e /usr/bin/python3 || (apt -y update && apt -y upgrade)
+#   changed_when: false
 
+# - name: "install nodejs, npm"
+#   become: true
+#   raw: test -e /usr/bin/python3 || (apt -y update && apt install -y nodejs npm)
+#   changed_when: false
 
+# - name: "Install pm2"
+#   become: true
+#   raw: test -e /usr/bin/python3 || (npm install pm2 -g)
+#   changed_when: false
 
 - name: extract artifact
   become: yes
   unarchive:
     src: files/artifact.tar.gz
     dest: .
-
 
 - name: "Start Server"
   become: true
@@ -59,10 +62,8 @@
     sudo pm2 stop default
     sudo pm2 start npm -- run start
 
-
-
 # - name: "Start "
-#   shell: | 
+#   shell: |
 #     npm install
 #     pm2 stop default
 #     pm2 start npm -- start
