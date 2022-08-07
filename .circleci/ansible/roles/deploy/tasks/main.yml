@@ -44,7 +44,7 @@
 
 - name: "Copy files to server"
   ansible.builtin.copy:
-    src: "files/artifact.tar.gz"
+    src: "/artifact.tar.gz"
     dest: "$HOME/artifact.tar.gz"
     follow: yes
 
