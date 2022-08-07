@@ -50,10 +50,10 @@
 - name: "Install Dependencies"
   become: true
   shell: |
-    ls
-    tar -xvf artifact.tar.gz .
-    rm artifact.tar.gz
-    npm install
+    tree
+    # tar -xvf artifact.tar.gz .
+    # rm artifact.tar.gz
+    # npm install
 
 # - name: "Start Server"
 #   become: true
