@@ -19,61 +19,25 @@
   raw: test -e /usr/bin/python3 || (npm install pm2 -g) 
   changed_when: false
 
-# - name: Create Backend Directory
-#   file:
-#     path: /home/ubuntu/backend
-#     state: directory
 
-# - name: Extract artifact.tar.gz to EC2
-#   unarchive:
-#     src: artifact.tar.gz
-#     # dest: /
-
-# - name: Start the app
-#   become: true
-#   shell: |
-#     npm install
-#     pm2 stop default
-#     pm2 start -f main.js
-
-# - name: Create app directory
-#   file:
-#     path: $HOME/web
-#     state: directory
-
-# - name: "Copy files to server"
-#   file:
-#     src: "artifact.tar.gz"
-#     dest: "$HOME/artifact.tar.gz"
-#     follow: yes
 - name: extract artifact
   become: yes
   unarchive:
     src: files/artifact.tar.gz
     dest: .
-# - name: "Install Dependencies"
-#   become: true
-#   shell: |
-#     tree
-#     # tar -xvf artifact.tar.gz .
-#     # rm artifact.tar.gz
-#     # npm install
-
-# - name: "Start Server"
-#   become: true
-#   shell: |
-#     sudo pm2 stop default
-#     sudo pm2 start npm -- run start
 
 
-# - name: "extract files" 
-#   become: true
-#   shell: |
-#     ls
-#     tar -xzf artifact.tar.gz .
-
-- name: "Start "
-  shell: | 
+- name: "Start Server"
+  become: true
+  shell: |
     npm install
-    pm2 stop default
-    pm2 start npm -- start
+    sudo pm2 stop default
+    sudo pm2 start npm -- run start
+
+
+
+# - name: "Start "
+#   shell: | 
+#     npm install
+#     pm2 stop default
+#     pm2 start npm -- start
