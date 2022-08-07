@@ -16,7 +16,7 @@
   
 - name: "Install pm2"
   become: true
-  raw: test -e /usr/bin/python3 || ( npm i -g pm2) 
+  raw: test -e /usr/bin/python3 || (npm install pm2 -g) 
   changed_when: false
 
 # - name: Create Backend Directory
