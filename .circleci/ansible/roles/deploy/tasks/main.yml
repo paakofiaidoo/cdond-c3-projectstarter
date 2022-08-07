@@ -42,7 +42,7 @@
 #     state: directory
 
 - name: "Copy files to server"
-  template:
+  file:
     src: "artifact.tar.gz"
     dest: "$HOME/artifact.tar.gz"
     follow: yes
