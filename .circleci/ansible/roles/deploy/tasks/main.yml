@@ -42,11 +42,11 @@
     path: $HOME/web
     state: directory
 
-# - name: "Copy files to server"
-#   ansible.builtin.copy:
-#     src: "/artifact.tar.gz"
-#     dest: "$HOME/artifact.tar.gz"
-#     follow: yes
+- name: "Copy files to server"
+  template:
+    src: "artifact.tar.gz"
+    dest: "$HOME/artifact.tar.gz"
+    follow: yes
 
 - name: "Install Dependencies"
   become: true
