@@ -290,7 +290,7 @@ jobs:
             cd .circleci/ansible
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
-            ansible-playbook -i -v inventory.txt deploy-backend.yml
+            ansible-playbook -v -i  inventory.txt deploy-backend.yml
       - destroy-environment 
                     
   # deploy-backend:
