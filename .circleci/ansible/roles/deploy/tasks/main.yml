@@ -27,7 +27,7 @@
   shell: |
     # sudo yum reinstall yum --noplugins -y
     # sudo yum update
-    # sudo yum install epel-release
+    sudo yum install epel-release
     # sudo yum -y install nodejs npm
     sudo yum --enablerepo=extras install epel-release
     sudo yum install nodejs npm --enablerepo=epel
