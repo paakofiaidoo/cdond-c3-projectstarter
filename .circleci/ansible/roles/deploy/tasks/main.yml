@@ -5,6 +5,7 @@
     sudo yum install -y gcc-c++ make 
     curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash - 
     sudo yum install -y nodejs npm
+    sudo yum update
 
 - name: extract artifact
   become: true
@@ -13,21 +14,30 @@
     dest: .
 
 - name: "Start Server"
+  environment:
+    - ENVIRONMENT: production
+    - NODE_ENV: production
+    - TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
+    - TYPEORM_MIGRATIONS_DIR: "./migrations"
+    - TYPEORM_MIGRATIONS: "./migrations/*.js"
+    - TYPEORM_ENTITIES: "./modules/domain/**/*.entity.js"
+    - TYPEORM_HOST: "{{ lookup('env', 'TYPEORM_HOST') }}"
+    - TYPEORM_PORT: "{{ lookup('env', 'TYPEORM_PORT') }}"
+    - TYPEORM_USERNAME: "{{ lookup('env', 'TYPEORM_USERNAME') }}"
+    - TYPEORM_PASSWORD: "{{ lookup('env', 'TYPEORM_PASSWORD') }}"
+    - TYPEORM_DATABASE: "{{ lookup('env', 'TYPEORM_DATABASE') }}"
   become: true
   shell: |
     sudo npm install pm2 -g
     sudo npm install --legacy-peer-deps
     sudo pm2 stop default
     sudo pm2 start npm -- run start
-  environment:
-    ENVIRONMENT: production
-    NODE_ENV: production
-    TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
-    TYPEORM_MIGRATIONS_DIR: "./migrations"
-    TYPEORM_MIGRATIONS: "./migrations/*.js"
-    TYPEORM_ENTITIES: "./modules/domain/**/*.entity.js"
-    TYPEORM_HOST: "{{ lookup('env', 'TYPEORM_HOST') }}"
-    TYPEORM_PORT: "{{ lookup('env', 'TYPEORM_PORT') }}"
-    TYPEORM_USERNAME: "{{ lookup('env', 'TYPEORM_USERNAME') }}"
-    TYPEORM_PASSWORD: "{{ lookup('env', 'TYPEORM_PASSWORD') }}"
-    TYPEORM_DATABASE: "{{ lookup('env', 'TYPEORM_DATABASE') }}"
+  
+
+
+# export ENVIRONMENT= production
+#     export NODE_ENV= production
+#     export TYPEORM_MIGRATIONS_DIR= "./migrations"
+#     export TYPEORM_MIGRATIONS= "./migrations/*.js"
+#     export TYPEORM_ENTITIES= "./modules/domain/**/*.entity.js"
+ 
