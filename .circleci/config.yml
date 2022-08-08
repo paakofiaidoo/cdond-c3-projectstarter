@@ -273,9 +273,10 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update tar gzip nodejs npm ansible curl aws-cli python3 python-apt
+            apk add --update tar gzip nodejs npm ansible curl aws-cli python3 
             apk add --update openssh-server
             apt name=python state=latest
+            apt-get install python-apt
       - restore_cache:
           keys: [backend-build]
       - run:
