@@ -30,8 +30,6 @@
 - name: "Install Python"
   become: true
   shell: |
-    # sudo amazon-linux-extras install epel
-    # sudo yum install nodejs npm 
     sudo yum install -y gcc-c++ make 
     curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash - 
     sudo yum install -y nodejs npm
@@ -56,11 +54,11 @@
 #   raw: test -e /usr/bin/python3 || (npm install pm2 -g)
 #   changed_when: false
 
-# - name: extract artifact
-#   become: yes
-#   unarchive:
-#     src: files/artifact.tar.gz
-#     dest: .
+- name: extract artifact
+  become: yes
+  unarchive:
+    src: files/artifact.tar.gz
+    dest: .
 
 - name: "Start Server"
   become: true
