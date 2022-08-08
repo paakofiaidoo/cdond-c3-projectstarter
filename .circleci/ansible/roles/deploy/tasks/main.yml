@@ -24,7 +24,7 @@
 
 - name: "Install Python"
   become: true
-  raw: apt -y update && apt install -y python
+  raw: yum -y python
   changed_when: false
 
 - name: "Update/upgrade packages"
