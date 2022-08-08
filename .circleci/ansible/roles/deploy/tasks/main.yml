@@ -23,7 +23,7 @@
     # production: yes
 
 - name: "Install Python"
-  shell: yum install node
+  shell: yum install nodejs
 
 - name: "Update/upgrade packages"
   become: true
