@@ -26,7 +26,7 @@ commands:
           name: Revert migrations
           when: on_fail
           command: |
-            SUCCESS=$(curl --insecure  https://kvdb.io/G35RoCZ4z3yvVokjrQebJB/${CIRCLE_WORKFLOW_ID:0:7_}/migration_<< parameters.workflow_id >>)
+            SUCCESS=$(curl --insecure  https://kvdb.io/G35RoCZ4z3yvVokjrQebJB/migration_${CIRCLE_WORKFLOW_ID:0:7_} << parameters.workflow_id >>)
             if(( $SUCCESS==1 )); 
             then
               cd ~/project/backend
@@ -225,9 +225,13 @@ jobs:
             sudo ls
             sudo apt-get update && sudo apt-get install -y ca-certificates
             cd backend
-            if grep -q "has been executed successfully." migrations_dump.txt
+            if grep -q "has been executed successfully." migrations_dmp.txt
             then
-                curl https://kvdb.io/G35RoCZ4z3yvVokjrQebJB/${CIRCLE_WORKFLOW_ID:0:7_}/migration_<  -d '1'
+                echo "fuck me"
+                curl https://kvdb.io/G35RoCZ4z3yvVokjrQebJB/migration_${CIRCLE_WORKFLOW_ID:0:7_} -d '1'
+            else
+                echo "migration failed!"
+                curl -k https://kvdb.io/G35RoCZ4z3yvVokjrQebJB/migration_${CIRCLE_WORKFLOW_ID:0:7_} -d '0'
             fi
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
