@@ -1,21 +1,21 @@
 ---
 
 - name: "update and upgrade packages."
-  become: yes
+  # become: yes
   apk:
     upgrade: yes
     update_cache: yes
 
 
 - name: install dependencies
-  become: yes
+  # become: yes
   apk:
     name: nodejs, npm, python3
     state: latest
     update_cache: yes
 
 - name: install pm2
-  become: yes
+  # become: yes
   npm:
     name: pm2
     global: yes
