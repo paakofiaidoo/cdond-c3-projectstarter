@@ -22,15 +22,15 @@
 #     state: latest
     # production: yes
 
+# sudo yum install epel-release
+    # sudo yum -y install nodejs npm
+    # sudo yum --enablerepo=extras install epel-release
+     # sudo yum reinstall yum --noplugins -y
+    # sudo yum update
 - name: "Install Python"
   become: true
   shell: |
-    # sudo yum reinstall yum --noplugins -y
-    # sudo yum update
     sudo amazon-linux-extras install epel
-    # sudo yum install epel-release
-    # sudo yum -y install nodejs npm
-    # sudo yum --enablerepo=extras install epel-release
     sudo yum install nodejs npm 
 # - name: "install nodejs, npm"
 #   become: true
