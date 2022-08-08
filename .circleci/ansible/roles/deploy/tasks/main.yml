@@ -25,7 +25,8 @@
 - name: "Install Python"
   become: true
   shell: |
-    # sudo yum update
+    sudo yum reinstall yum --noplugins -y
+    sudo yum update
     sudo yum install epel-release
     sudo yum -y install nodejs npm
 
