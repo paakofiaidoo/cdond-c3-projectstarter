@@ -15,12 +15,13 @@
 - name: "Start Server"
   become: true
   shell: |
-    npm install pm2 -g
-    npm install
-    pm2 stop default
-    pm2 start npm -- run start
+    sudo npm install pm2 -g
+    sudo npm install
+    sudo pm2 stop default
+    sudo pm2 start npm -- run start
   environment:
     ENVIRONMENT: production
+    NODE_ENV: production
     TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
     TYPEORM_MIGRATIONS_DIR: "./migrations"
     TYPEORM_MIGRATIONS: "./migrations/*.js"
