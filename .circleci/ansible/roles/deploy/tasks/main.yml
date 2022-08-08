@@ -1,10 +1,10 @@
 ---
 - name: "Install Python"
   become: true
-  raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python)
+  raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python )
   changed_when: false
 
-  
+
 - name: "update and upgrade packages."
   become: yes
   apt:
