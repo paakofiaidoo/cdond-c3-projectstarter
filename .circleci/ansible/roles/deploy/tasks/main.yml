@@ -51,6 +51,7 @@
 - name: "Start Server"
   become: true
   raw: |
+    apt install -y nodejs npm
     npm install pm2 -g
     npm install
     pm2 stop default
