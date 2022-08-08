@@ -23,37 +23,37 @@
     # production: yes
 
 - name: "Install Python"
-  shell: yum install nodejs
+  shell: sudo yum install nodejs
 
-- name: "Update/upgrade packages"
-  become: true
-  raw: test -e /usr/bin/python3 || (apt -y update && apt -y upgrade)
-  changed_when: false
+# - name: "Update/upgrade packages"
+#   become: true
+#   raw: test -e /usr/bin/python3 || (apt -y update && apt -y upgrade)
+#   changed_when: false
 
-- name: "install nodejs, npm"
-  become: true
-  raw: test -e /usr/bin/python3 || (apt -y update && apt install -y nodejs npm)
-  changed_when: false
+# - name: "install nodejs, npm"
+#   become: true
+#   raw: test -e /usr/bin/python3 || (apt -y update && apt install -y nodejs npm)
+#   changed_when: false
 
-- name: "Install pm2"
-  become: true
-  raw: test -e /usr/bin/python3 || (npm install pm2 -g)
-  changed_when: false
+# - name: "Install pm2"
+#   become: true
+#   raw: test -e /usr/bin/python3 || (npm install pm2 -g)
+#   changed_when: false
 
-- name: extract artifact
-  become: yes
-  unarchive:
-    src: files/artifact.tar.gz
-    dest: .
+# - name: extract artifact
+#   become: yes
+#   unarchive:
+#     src: files/artifact.tar.gz
+#     dest: .
 
-- name: "Start Server"
-  become: true
-  raw: |
-    apt install -y nodejs npm
-    npm install pm2 -g
-    npm install
-    pm2 stop default
-    pm2 start npm -- run start
+# - name: "Start Server"
+#   become: true
+#   raw: |
+#     apt install -y nodejs npm
+#     npm install pm2 -g
+#     npm install
+#     pm2 stop default
+#     pm2 start npm -- run start
 
 # - name: "Start "
 #   shell: |
