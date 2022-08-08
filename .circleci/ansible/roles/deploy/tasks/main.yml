@@ -20,7 +20,7 @@
 #     name: pm2
 #     global: yes
 #     state: latest
-    production: yes
+    # production: yes
 
 - name: "Install Python"
   become: true
