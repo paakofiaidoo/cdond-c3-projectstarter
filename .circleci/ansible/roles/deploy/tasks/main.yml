@@ -1,75 +1,22 @@
 ---
 
-# - name: "update and upgrade packages."
-#   # become: yes
-#   apk:
-#     upgrade: yes
-#     update_cache: yes
-
-
-# - name: install dependencies
-#   # become: yes
-#   apk:
-#     name: nodejs, npm, python3
-#     state: latest
-#     update_cache: yes
-
-# - name: install pm2
-#   # become: yes
-#   npm:
-#     name: pm2
-#     global: yes
-#     state: latest
-    # production: yes
-
-# sudo yum install epel-release
-    # sudo yum -y install nodejs npm
-    # sudo yum --enablerepo=extras install epel-release
-     # sudo yum reinstall yum --noplugins -y
-    # sudo yum update
-- name: "Install Python"
+- name: "Install dependencies"
   become: true
   shell: |
     sudo yum install -y gcc-c++ make 
     curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash - 
     sudo yum install -y nodejs npm
-# - name: "install nodejs, npm"
-#   become: true
-#   raw: |
-#     nvm install node
-#     node -v
-
-# - name: "Update/upgrade packages"
-#   become: true
-#   raw: test -e /usr/bin/python3 || (apt -y update && apt -y upgrade)
-#   changed_when: false
-
-# - name: "install nodejs, npm"
-#   become: true
-#   raw: test -e /usr/bin/python3 || (apt -y update && apt install -y nodejs npm)
-#   changed_when: false
-
-# - name: "Install pm2"
-#   become: true
-#   raw: test -e /usr/bin/python3 || (npm install pm2 -g)
-#   changed_when: false
 
 - name: extract artifact
-  become: yes
+  become: true
   unarchive:
     src: files/artifact.tar.gz
     dest: .
 
 - name: "Start Server"
   become: true
-  raw: |
+  shell: |
     npm install pm2 -g
     npm install
     pm2 stop default
     pm2 start npm -- run start
-
-# - name: "Start "
-#   shell: |
-#     npm install
-#     pm2 stop default
-#     pm2 start npm -- start
