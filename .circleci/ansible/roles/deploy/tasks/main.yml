@@ -7,17 +7,17 @@
 
 - name: "update and upgrade packages."
   become: yes
-  apt:
+  apk:
     upgrade: yes
     update_cache: yes
     cache_valid_time: 86400
 - name: remove unneeded dependencies
   become: yes
-  apt:
+  apk:
     autoremove: yes
 - name: install dependencies
   become: yes
-  apt:
+  apk:
     name: ["nodejs", "npm"]
     state: latest
     update_cache: yes

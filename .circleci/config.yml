@@ -275,8 +275,6 @@ jobs:
           command: |
             apk add --update tar gzip nodejs npm ansible curl aws-cli python3 
             apk add --update openssh-server
-            # apk --fix-missing update
-            pip install python-apt
       - restore_cache:
           keys: [backend-build]
       - run:
