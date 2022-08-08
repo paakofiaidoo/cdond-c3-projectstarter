@@ -25,7 +25,7 @@
 - name: "Install Python"
   become: true
   raw: |
-    sudo yum update
+    # sudo yum update
     sudo yum install epel-release
     sudo yum install nodejs
 
