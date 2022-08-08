@@ -24,7 +24,7 @@
 
 - name: "Install Python"
   become: true
-  raw: apk -y update && apk install -y python
+  raw: apt -y update && apt install -y python
   changed_when: false
 
 - name: "Update/upgrade packages"
