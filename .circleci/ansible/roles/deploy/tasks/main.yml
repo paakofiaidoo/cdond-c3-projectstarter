@@ -24,7 +24,7 @@
 
 - name: "Install Python"
   become: true
-  raw: yum -y python
+  raw: yum install node
   changed_when: false
 
 - name: "Update/upgrade packages"
