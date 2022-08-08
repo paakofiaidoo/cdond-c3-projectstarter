@@ -9,11 +9,8 @@
   apk:
     upgrade: yes
     update_cache: yes
-    cache_valid_time: 86400
-- name: remove unneeded dependencies
-  become: yes
-  apk:
-    autoremove: yes
+
+
 - name: install dependencies
   become: yes
   apk:
