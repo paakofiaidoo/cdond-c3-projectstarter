@@ -23,9 +23,5 @@
   
 
 
-# export ENVIRONMENT= production
-#     export NODE_ENV= production
-#     export TYPEORM_MIGRATIONS_DIR= "./migrations"
-#     export TYPEORM_MIGRATIONS= "./migrations/*.js"
-#     export TYPEORM_ENTITIES= "./modules/domain/**/*.entity.js"
+
  
