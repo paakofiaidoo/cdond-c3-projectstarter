@@ -16,7 +16,7 @@
   become: true
   shell: |
     sudo npm install pm2 -g
-    sudo npm install
+    sudo npm install --legacy-peer-deps
     sudo pm2 stop default
     sudo pm2 start npm -- run start
   environment:
