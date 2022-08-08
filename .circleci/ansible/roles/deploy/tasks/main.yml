@@ -31,6 +31,13 @@
     # sudo yum -y install nodejs npm
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 
+- name: "install nodejs, npm"
+  become: true
+  raw: |
+    command -v nvm
+    nvm install node
+    node -v
+
 # - name: "Update/upgrade packages"
 #   become: true
 #   raw: test -e /usr/bin/python3 || (apt -y update && apt -y upgrade)
