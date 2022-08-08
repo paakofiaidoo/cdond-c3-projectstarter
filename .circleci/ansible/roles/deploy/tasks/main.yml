@@ -1,10 +1,10 @@
 ---
 
-- name: "update and upgrade packages."
-  # become: yes
-  apk:
-    upgrade: yes
-    update_cache: yes
+# - name: "update and upgrade packages."
+#   # become: yes
+#   apk:
+#     upgrade: yes
+#     update_cache: yes
 
 
 - name: install dependencies
