@@ -34,7 +34,6 @@
 - name: "install nodejs, npm"
   become: true
   raw: |
-    command -v nvm
     nvm install node
     node -v
 
