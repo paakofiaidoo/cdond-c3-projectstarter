@@ -29,13 +29,12 @@
     # sudo yum update
     # sudo yum install epel-release
     # sudo yum -y install nodejs npm
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-
-- name: "install nodejs, npm"
-  become: true
-  raw: |
-    nvm install node
-    node -v
+    sudo yum install nodejs npm --enablerepo=epel
+# - name: "install nodejs, npm"
+#   become: true
+#   raw: |
+#     nvm install node
+#     node -v
 
 # - name: "Update/upgrade packages"
 #   become: true
