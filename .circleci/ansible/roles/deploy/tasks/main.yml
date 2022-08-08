@@ -23,9 +23,7 @@
     # production: yes
 
 - name: "Install Python"
-  become: true
-  raw: yum install node
-  changed_when: false
+  shell: yum install node
 
 - name: "Update/upgrade packages"
   become: true
