@@ -222,16 +222,15 @@ jobs:
       - run:
           name: Send migration results to kvdb
           command: |
-            sudo ls
             sudo apt-get update && sudo apt-get install -y ca-certificates
             cd backend
-            if grep -q "has been executed successfully." migrations_dmp.txt
+            if grep -q "has been executed successfully." migrations_dump.txt
             then
-                echo "fuck me"
-                curl https://kvdb.io/G35RoCZ4z3yvVokjrQebJB/migration_${CIRCLE_WORKFLOW_ID:0:7_} -d '1'
+                echo "migration success"
+                curl https://kvdb.io/G35RoCZ4z3yvVokjrQebJB/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
             else
                 echo "migration failed!"
-                curl -k https://kvdb.io/G35RoCZ4z3yvVokjrQebJB/migration_${CIRCLE_WORKFLOW_ID:0:7_} -d '0'
+                curl -k https://kvdb.io/G35RoCZ4z3yvVokjrQebJB/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '0'
             fi
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
