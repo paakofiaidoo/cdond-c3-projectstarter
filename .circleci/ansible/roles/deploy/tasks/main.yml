@@ -8,6 +8,8 @@
     Sudo npm install -g n
     sudo n 10.16.0
     # sudo yum update
+    sudo -i
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 
 - name: extract artifact
   become: true
