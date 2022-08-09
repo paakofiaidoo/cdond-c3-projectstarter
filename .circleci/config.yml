@@ -222,11 +222,7 @@ jobs:
           command: |
             # sudo apk install aws-cli
             cd backend
-<<<<<<< HEAD
             npm install
-=======
-            # npm install
->>>>>>> 91c6021f5ebed726ce9231a37141cba75afff1e0
             npm run migrations > migrations_dump.txt
       - run:
           name: Send migration results to kvdb
