@@ -16,9 +16,9 @@
 - name: "Start Server"
   become: true
   shell: |
-    sudo npm i @nestjs/common@6.11.11
-    sudo npm i @nestjs/core@6.11.11
-    sudo npm i @nestjs/swagger@3.1.0
+    # sudo npm i @nestjs/common@6.11.11
+    # sudo npm i @nestjs/core@6.11.11
+    # sudo npm i @nestjs/swagger@3.1.0
     sudo npm install pm2 -g
     sudo npm install --legacy-peer-deps
     sudo pm2 stop default
