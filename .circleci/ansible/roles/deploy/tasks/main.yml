@@ -3,22 +3,9 @@
   become: true
   shell: |
     sudo yum install -y gcc-c++ make 
-    curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash - 
+    curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash - 
     sudo yum install -y nodejs npm
-    # sudo npm install -g n
-    # sudo n 10.16.0
-    # sudo yum update
-    sudo -i
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-
-
-
-- name: "node "
-  become: true
-  shell: |
-    sudo -i
-    nvm install 10
-    nvm use 10
+ 
 
 - name: extract artifact
   become: true
