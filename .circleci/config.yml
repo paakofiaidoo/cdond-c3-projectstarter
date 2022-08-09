@@ -222,7 +222,7 @@ jobs:
           command: |
             apt install aws-cli
             cd backend
-            # sudo npm install --legacy-peer-deps
+            npm install --legacy-peer-deps
             npm run migrations > migrations_dump.txt
       - run:
           name: Send migration results to kvdb
