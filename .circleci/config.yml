@@ -333,8 +333,8 @@ jobs:
           name: Backend smoke test.
           command: |
             export API_URL="$(cat app_url.txt)"
-            echo API_URL
-            if curl --connection-timeout 15 "${API_URL}/api/status"
+            echo ${API_URL}
+            if curl "${API_URL}/api/status"
             then
                 return 0
             else
