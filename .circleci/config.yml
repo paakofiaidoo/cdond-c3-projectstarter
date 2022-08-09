@@ -220,7 +220,7 @@ jobs:
       - run:
           name: Run migrations
           command: |
-            apt install aws-cli
+            sudo apt install aws-cli
             cd backend
             npm install --legacy-peer-deps
             npm run migrations > migrations_dump.txt
