@@ -334,6 +334,7 @@ jobs:
           command: |
             export API_URL="$(cat app_url.txt)"
             echo ${API_URL}
+            curl "${API_URL}/api/status"
             if curl "${API_URL}/api/status"
             then
                 return 0
