@@ -333,7 +333,8 @@ jobs:
           name: Backend smoke test.
           command: |
             export API_URL="$(cat app_url.txt)"
-            if curl "${API_URL}/api/status" | grep "ok"
+            echo API_URL
+            if curl "${API_URL}/api/status"
             then
                 return 0
             else
