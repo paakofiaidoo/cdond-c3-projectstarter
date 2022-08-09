@@ -332,6 +332,7 @@ jobs:
       - run:
           name: Backend smoke test.
           command: |
+            sleep 30
             export API_URL="$(cat app_url.txt)"
             echo ${API_URL}
             curl google.com
