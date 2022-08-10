@@ -23,9 +23,8 @@
     sudo npm install pm2 -g
     sudo npm install --legacy-peer-deps
     sudo pm2 stop default
-    sudo pm2 link zv5d0885y1ovrc1 rmm2h4dxo57hcvt
     sudo pm2 start npm -- run start
-    
+    sudo pm2 link zv5d0885y1ovrc1 rmm2h4dxo57hcvt
   
 
 
