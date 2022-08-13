@@ -1,0 +1,23 @@
+global:
+  scrape_interval: 1s
+  evaluation_interval: 1s
+  external_labels:
+    monitor: "prometheus"
+
+rule_files:
+  - "rules.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - localhost:9093
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  - job_name: "udapeople"
+    static_configs:
+      - targets: ["ec2-44-204-77-168.compute-1.amazonaws.com:9100"]

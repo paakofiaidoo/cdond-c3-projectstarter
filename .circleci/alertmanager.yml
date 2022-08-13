@@ -1,0 +1,13 @@
+route:
+  group_by: [Alertname]
+  receiver: email-me
+
+receivers:
+  - name: email-me
+    email_configs:
+      - to: paakofiaidoo17@gmail.com
+        from: paakofiaidoo17@gmail.com
+        smarthost: smtp.gmail.com:587
+        auth_username: paakofiaidoo17@gmail.com
+        auth_identity: paakofiaidoo17@gmail.com
+        auth_password: hhpeplwwlkjvksyk
