@@ -454,6 +454,5 @@ workflows:
           requires: [smoke-test]
           filters:
             branches:
-              only: [master]      
-
-
+              only: [master]   
+      
