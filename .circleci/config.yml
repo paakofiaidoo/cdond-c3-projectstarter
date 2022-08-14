@@ -444,16 +444,16 @@ workflows:
       #     filters:
       #       branches:
       #         only: [master]      
-      - cleanup:
+      - cloudfront-update:
           requires: [cloudfront-update]
           filters:
             branches:
               only: [master]
-      - cloudfront-update:
+      - cleanup:
           requires: [deploy-infrastructure]
           filters:
             branches:
-              only: [master]
-      # - cloudfront-update
+              only: [master]      
+    # - cloudfront-update
       # - cleanup
 
