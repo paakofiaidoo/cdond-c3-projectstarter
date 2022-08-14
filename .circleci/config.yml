@@ -454,8 +454,9 @@ workflows:
       #     filters:
       #       branches:
       #         only: [master]
-      - cleanup:
-          requires: [cloudfront-update]
-          filters:
-            branches:
-              only: [master]
+      - cleanup
+      # - cleanup:
+          # requires: [cloudfront-update]
+          # filters:
+          #   branches:
+          #     only: [master]
