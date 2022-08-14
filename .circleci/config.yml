@@ -367,7 +367,7 @@ jobs:
             aws cloudformation deploy \
               --template-file .circleci/files/cloudfront.yml \
               --stack-name udapeopleStack \
-              --parameter-overrides WorkflowID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}" \
               --tags project=udapeople
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
@@ -391,17 +391,13 @@ jobs:
             # Fetch the stack names          
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
                     --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
-            echo Stack names: "${STACKS[@]}"  
-            echo Stack names: "${STACKS}" 
-            echo oldflow ${OldWorkflowID}
-            echo CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID:0:7}"
-            echo Stack to be deleted: ${STACKS}
-            if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
-              echo "${STACKS[@]}"
+           
+            if [[ "${CIRCLE_WORKFLOW_ID:0:7}" =~ "${OldWorkflowID}" ]]
+              echo "${CIRCLE_WORKFLOW_ID:0:7}"
               echo "delete stack ${OldWorkflowID:9}"
               # aws s3 rm "s3://${STACKS[@]}" --recursive
-              # aws cloudformation delete-stack --stack-name "OldWorkflowID${OldWorkflowID:9}"
-              # aws cloudformation delete-stack --stack-name "OldWorkflowID${OldWorkflowID:9}"
+              # aws cloudformation delete-stack --stack-name "${OldWorkflowID:9}"
+              # aws cloudformation delete-stack --stack-name "${OldWorkflowID:9}"
             then
               echo "nothing to delete"
             fi
