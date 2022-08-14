@@ -388,7 +388,7 @@ jobs:
                     --no-paginate --output text)
             # Fetch the stack names          
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
-                    --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
+                --stack-status-filter CREATE_COMPLETE --no-paginate --output text))
             for word in $(STACKS); do echo $word; done
             # if [[ "${CIRCLE_WORKFLOW_ID:0:7}" !=~ "${OldWorkflowID}" ]]
             #   # aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
@@ -446,6 +446,7 @@ workflows:
       #     filters:
       #       branches:
       #         only: [master]
+      - cloudfront-update
       - cleanup
       # - cleanup:
           # requires: [cloudfront-update]
