@@ -390,15 +390,15 @@ jobs:
                     --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
             
             echo Stack names: "${STACKS}" 
-            echo ${OldWorkflowID} >> OldWorkflowID.txt
+            echo oldflow ${OldWorkflowID}
             echo CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID:0:7}"
             echo Stack to be deleted: ${STACKS}
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
               echo "${STACKS[@]}"
-              echo "delete stack ${OldWorkflowID} ${STACKS[@]}"
+              echo "delete stack ${OldWorkflowID}"
               # aws s3 rm "s3://${STACKS[@]}" --recursive
-              aws cloudformation delete-stack --stack-name "udapeople-backend-${STACKS[@]}"
-              aws cloudformation delete-stack --stack-name "udapeople-frontend-${STACKS[@]}"
+              # aws cloudformation delete-stack --stack-name "${STACKS[@]}"
+              # aws cloudformation delete-stack --stack-name "udapeople-frontend-${STACKS[@]}"
             then
               echo "nothing to delete"
             fi
