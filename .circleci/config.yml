@@ -382,23 +382,26 @@ jobs:
       - run:
           name: Get old stack workflow id
           command: |
+            # Fetch the Old workflow ID
             export OldWorkflowID=$(aws cloudformation \
                     list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
                     --no-paginate --output text)
-                  
+            echo OldWorkflowID: "${OldWorkflowID}"
+            echo CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID:0:7}"
+            # Fetch the stack names          
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
                     --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
-            
+            echo Stack names: "${STACKS[@]}"  
             echo Stack names: "${STACKS}" 
             echo oldflow ${OldWorkflowID}
             echo CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID:0:7}"
             echo Stack to be deleted: ${STACKS}
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
               echo "${STACKS[@]}"
-              echo "delete stack ${OldWorkflowID}"
+              echo "delete stack ${OldWorkflowID:9}"
               # aws s3 rm "s3://${STACKS[@]}" --recursive
-              # aws cloudformation delete-stack --stack-name "${STACKS[@]}"
-              # aws cloudformation delete-stack --stack-name "udapeople-frontend-${STACKS[@]}"
+              # aws cloudformation delete-stack --stack-name "OldWorkflowID${OldWorkflowID:9}"
+              # aws cloudformation delete-stack --stack-name "OldWorkflowID${OldWorkflowID:9}"
             then
               echo "nothing to delete"
             fi
