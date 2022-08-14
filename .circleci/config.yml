@@ -397,15 +397,16 @@ jobs:
           command: |
             export OldWorkflowID=$(cat OldWorkflowID.txt)
             export STACK=$(cat STACK.txt)
-            if [[ "${STACKS[@]}" != "udapeople=${CIRCLE_WORKFLOW_ID:0:7}" ]]
-              echo "${STACKS[@]}"
-              echo "delete stack ${OldWorkflowID} ${STACKS[@]}"
-              # aws s3 rm "s3://${STACKS[@]}" --recursive
-              aws cloudformation delete-stack --stack-name "udapeople-backend-${STACKS[@]}"
-              aws cloudformation delete-stack --stack-name "udapeople-frontend-${STACKS[@]}"
-            then
-              echo "nothing to delete"
-            fi
+            echo Stack to be deleted: ${STACK}
+            # if [[ "${STACKS[@]}" != "udapeople=${CIRCLE_WORKFLOW_ID:0:7}" ]]
+            #   echo "${STACKS[@]}"
+            #   echo "delete stack ${OldWorkflowID} ${STACKS[@]}"
+            #   # aws s3 rm "s3://${STACKS[@]}" --recursive
+            #   aws cloudformation delete-stack --stack-name "udapeople-backend-${STACKS[@]}"
+            #   aws cloudformation delete-stack --stack-name "udapeople-frontend-${STACKS[@]}"
+            # then
+            #   echo "nothing to delete"
+            # fi
 
 workflows:
   default:
