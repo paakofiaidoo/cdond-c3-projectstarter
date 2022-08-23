@@ -10,4 +10,4 @@ receivers:
         smarthost: smtp.gmail.com:587
         auth_username: paakofiaidoo17@gmail.com
         auth_identity: paakofiaidoo17@gmail.com
-        auth_password: hhpeplwwlkjvksyk
+        auth_password: password
